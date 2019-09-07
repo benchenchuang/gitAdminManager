@@ -1,0 +1,82 @@
+/***
+*设置详情页弹窗样式
+*iview modal
+ */
+.detailsModal .ivu-modal {
+  width: calc(100% - 40px) !important;
+  top: 20px !important;
+  min-height: calc(100vh - 300px) !important;
+  margin-bottom: 20px;
+}
+
+.detailsModal .ivu-modal-mask {
+  display: none !important;
+}
+
+.detailsModal .ivu-modal-wrap {
+  margin-left: 200px;
+  margin-top: 64px !important;
+}
+
+.detailsModal .ivu-modal-body {
+  min-height: calc(100vh - 160px);
+}
+
+.detailsModal ::-webkit-scrollbar {
+  display: none;
+}
+.title_line_none .ivu-modal-header{
+  border-bottom: none !important;
+}
+
+/***
+*设置动画时间
+*iview
+ */
+.animated {
+  -webkit-animation-duration: 1.5s !important;
+  animation-duration: 1.5s !important;
+}
+
+.demo-spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}
+
+/***
+*设置加载中透明度
+*iview spin
+ */
+.ivu-spin-fix {
+  background-color: rgba(255, 255, 255, .7) !important;
+}
+
+/**
+*设置列表头部筛选card的样式
+*iview Card
+ */
+.top_card_out .ivu-card{
+  padding: 22px 22px 0 22px;
+}
+.tabs_card_out .ivu-card{
+  padding: 5px 22px 22px 22px;
+}
+
+.editmailTable .ivu-input{
+  border: none !important;
+  outline:none !important
+}
+.editmailTable .ivu-input:hover {
+  border: none !important;
+}
+.editmailTable textarea{
+  resize:none !important;
+  border:none !important
+}
+
+.toplines .ivu-dropdown-rel .ivu-dropdown-item:hover {
+  background: transparent !important;
+}
+
+.toplines .ivu-dropdown .ivu-dropdown-item{
+  padding-left: 0 !important;
+}
