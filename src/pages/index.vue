@@ -139,4 +139,12 @@ export default {
     width: 100% !important;
     height: 100%!important;
 }
+.main_wrap{
+    padding: 20px;
+    background: #fff;
+    .table_page{
+        text-align: right;
+        margin: 20px 0;
+    }
+}
 </style>

@@ -31,14 +31,34 @@ const store = new Vuex.Store({
         parentName:({commit},parentName)=>commit('parentName',parentName),
         userInfo:({commit},userData)=>commit('userInfo',userData),
         permission:({commit},role)=>{
+            // let routerArry= deepCopy(AdminRouter);
+            // commit('navList',routerArry)
             let routerArry= deepCopy(AdminRouter);
-            commit('navList',routerArry)
+            const getRouters= filterAsyncRouter(routerArry,role);
+            if(role==2){
+                getRouters[0].redirect="/meke/index";
+            }
+            commit('navList',getRouters)
         },
         getParentName:({commit})=>{
             return commit('getParent')
         }
     }
 });
+//根据权限筛选路由
+function filterAsyncRouter(asyncRouterMap,role){
+    // return asyncRouterMap
+    let accessedRouters = asyncRouterMap.filter(route => {
+        if (route.meta.role.indexOf(role) >= 0) {
+          if (route.children && route.children.length) {
+            route.children = filterAsyncRouter(route.children, role)
+          }
+          return true
+        }
+        return false
+    })
+    return accessedRouters;
+}
 //深拷贝
 function deepCopy(routerArr){
     return routerArr.map(arr=>{

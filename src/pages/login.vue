@@ -83,7 +83,7 @@ export default {
            }
         },
         handleSubmit() {//登陆
-            let redirect = decodeURIComponent(this.$route.query.redirect || '/meke');
+            let redirect = decodeURIComponent(this.$route.query.redirect || '/meke/index');
             let {login,passWord,code} = this.form;
             if(!login){
                 this.$Message.error('用户名不能为空');
@@ -101,27 +101,34 @@ export default {
                 this.$Message.error('验证码错误');
                 return;
             }
-            this.$Message.info('正在登陆中...');
-            homeApi.userLogin(this.form).then(res=>{
+            if((login!='admin' || passWord!="201910")&& (login!='vistor' || passWord!="123456")){
+                this.$Message.error('账号或密码不正确');
+                return;
+            }else{
+                this.$Message.info('正在登陆中...');
+                localStorage.setItem('sessionId',login+'_123456');
                 this.$Message.destroy()
-                if(res.state==0){
-                    this.$Message.success('登陆成功！');
-                    let userInfo = res.data;
-                    store.dispatch('userInfo', userInfo);
-                    localStorage.setItem('userInfo',JSON.stringify(userInfo));
-                    localStorage.setItem('sessionId',userInfo.session_id);
-                    store.dispatch('permission').then(()=>{
-                        router.addRoutes(store.state.navList);
-                    })
-                    setTimeout(()=>{
-                        this.$router.push({
-                            path: redirect
-                        })
-                    },1000)
+                this.$Message.success('登陆成功！');
+                let userInfo = {};
+                let role = 1;
+                if(login=='admin'){
+                    role = 1;
+                    userInfo = {userName:'admin',password:'201910',type:1};
                 }else{
-                    this.$Message.error(res.message);
+                    role = 2;
+                    userInfo = {userName:'vistor',password:'123456',type:2};
                 }
-            })
+                store.dispatch('userInfo', userInfo);
+                localStorage.setItem('userInfo',JSON.stringify(userInfo));
+                store.dispatch('permission',role).then(()=>{
+                    router.addRoutes(store.state.navList);
+                })
+                setTimeout(()=>{
+                    this.$router.push({
+                        path: redirect
+                    })
+                },500)
+            }
         }
     }
 }

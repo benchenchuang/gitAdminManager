@@ -32,15 +32,16 @@ router.beforeEach((to, from, next) => {
   }
   let info = store.state.userInfo;//获取用户信息
   let infoLength = Object.keys(info).length===0;
-  if(infoLength && to.path!=='/login'){
+  if(infoLength && to.path!='/login'){
     let userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
-    if(userInfo.type){
+    if((userInfo.userName=='admin' && userInfo.password=='201910')||(userInfo.userName=='vistor' && userInfo.passWord=="123456")){
       store.dispatch('userInfo', userInfo)//用户信息存入vuex
-      store.dispatch('permission').then(()=>{
+      store.dispatch('permission', userInfo.type).then(()=>{
         router.addRoutes(store.state.navList, { replace: true });
+        next({ ...to, replace: true })
       })
-      next({ ...to, replace: true })
     }else{
+      localStorage.removeItem('userInfo');
       next({
         path: '/login',
         query: {redirect: to.fullPath}
@@ -51,7 +52,7 @@ router.beforeEach((to, from, next) => {
     if(to.path=='/login'){
       if(userInfo){
         next({
-          path: '/meke'
+          path: '/meke/index'
         });
       }else{
         next()

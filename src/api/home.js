@@ -1,28 +1,25 @@
 import * as axiosApi from './axios'
 
 export default{
-    //用户登录
-    userLogin:(params) => axiosApi.postAixos('system/login',params),
-    //用户登出
-    loginOut:()=> axiosApi.getAxios('system/login'),
-    //获取待处理事务
-    getDealEvents : () =>axiosApi.getAxios('index/dataCenter'),
-    //用户登录日志
-    getLogs:(params) => axiosApi.postAixos('system/getLoginLog',params),
-    //获取用户信息
-    getUserInfo : (id)=>axiosApi.getAxios(`system/getInformation/${id}`),
-    //获取实时概况
-    getTotalInfo:()=> axiosApi.getAxios('index/dataTop'),
-    //获取首页echarts //1今日 2本周 3本月 4 自定义时间
-    getEchartsData :(params)=>axiosApi.postAixos('index/dataEchaets',params),
-    //成员管理
-    getMemberList: (params) => axiosApi.postAixos('system/getAdminSelect',params),
-    //更改成员启用状态
-    changeMemberStatus : (id,status) => axiosApi.getAxios(`system/accounStatus?id=${id}&status=${status}`),
-    //删除成员
-    delMember : (id) => axiosApi.getAxios(`system/delAccount/${id}`),
-    //添加/编辑成员
-    addMember : (params) => axiosApi.postAixos('system/addAdmin',params),
-    //企业申请列表
-    getEnterpriseList:(params) => axiosApi.postAixos('enterprise/getEnterpriseList',params)
+    //首页获取每日人数
+    getDailyNum:()=>axiosApi.getAxios('duration/dailyNum'),
+    //首页获取指定日期人数
+    getNumByDay:(date)=>axiosApi.getAxios(`duration/aggNumByDay?day=${date}`),
+    //新增间隔时间段
+    addDuration:(params)=>axiosApi.postAixos('duration/addDuration',params),
+    //查询所有日期段
+    getDayTimes:(params)=>axiosApi.postAixos('duration/queryDuration',params),
+    //查询所有日期
+    getAllDays:()=>axiosApi.getAxios('duration/queryDay'),
+    //查询某天时间段
+    getOneDay:(params)=>axiosApi.getAxios('duration/queryDuration',params),
+    //查询所有用户信息
+    getAllUsers:(params)=>axiosApi.postAixos(`user/queryAll`,params),
+    //修改预约人数
+    updateLimitedNum:(params)=>axiosApi.getAxios(`duration/updateLimitedNum`,params),
+    //删除某个时间段
+    delDayTime:(params)=>axiosApi.getAxios(`duration/deleteById`,params),
+    //提示信息获取与更新
+    getTipMessages:()=>axiosApi.getAxios('tip/queryTip'),
+    saveTipMessages:(params)=>axiosApi.postAixos('tip/updateTip',params),
 }

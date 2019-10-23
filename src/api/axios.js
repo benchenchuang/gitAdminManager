@@ -71,7 +71,7 @@ axios.interceptors.response.use(
  */
 export function getAxios(url, params = {}) {
   return new Promise((resolve, reject) => {
-    axios.get(`/V2.0/${url}`, {
+    axios.get(`/${url}`, {
       params: params
     })
       .then(response => {
@@ -91,7 +91,7 @@ export function getAxios(url, params = {}) {
  */
 export function postAixos(url, data = {}, timeOut = 0) {
   return new Promise((resolve, reject) => {
-    axios.post(`/V2.0/${url}`, data, {timeout: timeOut == 0 ? 5000 : 1000 * 60 * 2})
+    axios.post(`/${url}`, data)
       .then(response => {
         resolve(response.data);
       }, err => {
@@ -108,7 +108,7 @@ export function postAixos(url, data = {}, timeOut = 0) {
  */
 export function deleteAixos(url) {
   return new Promise((resolve, reject) => {
-    axios.delete(`/V2.0/${url}`)
+    axios.delete(`/${url}`)
       .then(response => {
         resolve(response.data);
       }, err => {
@@ -125,7 +125,7 @@ export function deleteAixos(url) {
  */
 export function patchAxios(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.patch(`/V2.0/${url}`, data)
+    axios.patch(`/${url}`, data)
       .then(response => {
         resolve(response.data);
       }, err => {
@@ -142,7 +142,7 @@ export function patchAxios(url, data = {}) {
  */
 export function putAxios(url, data = {}) {
   return new Promise((resolve, reject) => {
-    axios.put(`/V2.0/${url}`, data)
+    axios.put(`/${url}`, data)
       .then(response => {
         resolve(response.data);
       }, err => {
