@@ -12,7 +12,7 @@
   "dependencies": {
     "@huoyu/vue-digitroll": "^1.0.4",
     "@tinymce/tinymce-vue": "^2.1.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "captchagen": "^1.2.0",
     "iview": "^3.4.0",
     "js-file-download": "^0.4.7",
